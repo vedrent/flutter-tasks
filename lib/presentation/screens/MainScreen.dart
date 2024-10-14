@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_5/data/StaticData.dart';
+import 'package:task_5/data/ProductsData.dart';
 import 'package:task_5/presentation/screens/CreateProductScreen.dart';
 import 'package:task_5/presentation/screens/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/widgets/ProductWidget.dart';

@@ -1,4 +1,4 @@
-import 'package:task_5/presentation/models/ProductModel.dart';
+import '../presentation/models/ProductModel.dart';
 
 var initialProducts = [
   ProductModel(
