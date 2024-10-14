@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:task_5/presentation/screens/profile/EditProfileScreen.dart';
+
+import 'package:task_5/data/PersonData.dart';
+import 'package:task_5/presentation/models/PersonModel.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -9,32 +12,75 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  var profile = profileModel;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Фамилия Имя Отчество",
-            style: TextStyle(
-                fontSize: 20
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Профиль"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TextFormField(
+              initialValue: profile.name,
+              maxLines: null,
+              readOnly: true,
             ),
-          ),
-          Text(
-            "Временная заглушка для профиля",
-            style: TextStyle(
-                fontSize: 20
+            TextFormField(
+              initialValue: profile.group,
+              maxLines: null,
+              readOnly: true,
             ),
-          ),
-          Text(
-            "Flutter task 5",
-            style: TextStyle(
-                fontSize: 20
+            TextFormField(
+              keyboardType: TextInputType.number,
+              initialValue: "Flutter task_${profile.taskNumber.toString()}",
+              readOnly: true,
             ),
-          ),
-        ],
+            TextFormField(
+              initialValue: profile.phoneNumber,
+              maxLines: null,
+              readOnly: true,
+            ),
+            TextFormField(
+              initialValue: profile.email,
+              maxLines: null,
+              readOnly: true,
+            ),
+
+            const Spacer(),
+            OutlinedButton(
+              onPressed: () async {
+                final updatedProfile = await Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => EditProfileScreen(
+                              oldProfile: profile,
+                              onProfileCreated: (PersonModel value) {
+                                setState(() {
+                                  profile = value;
+                                });
+                              },
+                            ),
+                          ));
+                if (updatedProfile != null) {
+                  setState(() {
+                    profile = updatedProfile;  // Обновляем профиль
+                  });
+                }
+                  },
+                style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    minimumSize: const Size(300,50),
+                    backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                    side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+                ),
+                child: const Text("Редактировать")
+            ),
+          ],
+        ),
       ),
     );
   }
