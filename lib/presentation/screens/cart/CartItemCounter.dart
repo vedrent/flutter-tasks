@@ -18,30 +18,38 @@ class CartItemCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-            onPressed: () {
-              onIncreasePressed();
-            },
-            icon: const Icon(Icons.plus_one)
-        ),
-        Container(
-          height: 30,
-          width: 30,
-          color: Colors.white,
-          child: Center(
-              child: Text(count.toString(), style: const TextStyle(fontSize: 20))
-          ),
-        ),
-        IconButton(
-            onPressed: () {
-              onDecreasePressed();
-            },
-            icon: const Icon(Icons.exposure_minus_1)
-        ),
-      ],
+    return
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ButtonTheme(
+              height: 10,
+              minWidth: 10,
+              child: IconButton(
+                  onPressed: () {
+                    onDecreasePressed();
+                  },
+                  icon: const Icon(Icons.remove)
+              ),
+            ),
+            SizedBox(
+              height: 20,
+              width: 20,
+              child: Center(
+                  child: Text(count.toString(), style: const TextStyle(fontSize: 18))
+              ),
+            ),
+            ButtonTheme(
+              height: 10,
+              minWidth: 10,
+              child: IconButton(
+                  onPressed: () {
+                    onIncreasePressed();
+                  },
+                  icon: const Icon(Icons.add)
+              ),
+            ),
+          ],
     );
   }
 }

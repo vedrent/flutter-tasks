@@ -16,15 +16,25 @@ class CartBottomBar extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text("$totalCount элементов", style: const TextStyle(fontSize: 20)),
+            Text("$totalCount товар(-а/-ов)", style: const TextStyle(fontSize: 20)),
             const Spacer(),
-            Text("Итого: $totalPrice", style: const TextStyle(fontSize: 20)),
+            Text("Сумма: $totalPrice₽", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           ],
         ),
+
         SizedBox(
             width: double.infinity,
             child: OutlinedButton(
               child: const Text("Купить", style: TextStyle(fontSize: 20)),
+
+              style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minimumSize: const Size(300,50),
+                  backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                  side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+              ),
               onPressed: () {},
             )
         )

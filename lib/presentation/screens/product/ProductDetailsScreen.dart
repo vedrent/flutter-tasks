@@ -15,6 +15,14 @@ class ProductDetailScreen extends StatelessWidget {
     required this.onLikeClicked,
   });
 
+  IconData getFavoriteIconData() {
+    if (product.isFavorite) {
+      return Icons.favorite_outlined;
+    } else {
+      return Icons.favorite_outline;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,25 +63,44 @@ class ProductDetailScreen extends StatelessWidget {
                     onPressed: () {
                       onLikeClicked();
                     },
-                    icon: Icon(Icons.favorite_outline)
+                    icon: Icon(getFavoriteIconData(),
+                      color: product.isFavorite ? Colors.red : Colors.white,
+                      shadows: const <Shadow>[Shadow(color: Colors.black, blurRadius: 5.0)],
+                    ),
                 ),
-                const SizedBox(
-                  width: 8,
+                const Spacer(),
+                ButtonTheme(
+                  minWidth: 300,
+                  child: OutlinedButton(
+                      onPressed: () {
+                        onInCartPressed();
+                      },
+                      style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          minimumSize: const Size(150,50),
+                          backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                          side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+                      ),
+                      child: const Text("В корзину"),
+                  ),
+
                 ),
-                OutlinedButton(
-                    onPressed: () {
-                      onInCartPressed();
-                    },
-                    child: const Text("В корзину")
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
+                const Spacer(),
                 OutlinedButton(
                     onPressed: () {
                       onDeleteClicked();
                       Navigator.pop(context);
                     },
+                    style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize: const Size(150,50),
+                        backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                        side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+                    ),
                     child: const Text("Удалить")
                 ),
               ],

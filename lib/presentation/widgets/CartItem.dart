@@ -19,8 +19,8 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: Slidable(
 
           direction: Axis.horizontal,
@@ -43,13 +43,17 @@ class CartItem extends StatelessWidget {
           key: ValueKey(item.id.toString()),
           child: ListTile(
             leading: Image.network(
+              alignment: Alignment.center,
               item.imageUri,
-              width: 70,
-              height: 70,
+              width: 60,
+              height: 60,
               fit: BoxFit.cover,
             ),
-            title: Text(item.title),
-            subtitle: Text("${item.cost}₽"),
+            title: Text(item.title, maxLines: 3, overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            subtitle: Text("${item.cost}₽",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             trailing: CartItemCounter(
               count: item.count,
               onIncreasePressed: () {
