@@ -1,5 +1,5 @@
-class CartModel {
-  CartModel(
+class CartItemModel {
+  CartItemModel(
       this.id,
       this.title,
       this.subtitle,

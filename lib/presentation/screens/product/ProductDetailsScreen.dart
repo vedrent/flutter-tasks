@@ -3,8 +3,17 @@ import 'package:task_5/presentation/models/ProductModel.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final ProductModel product;
+  final VoidCallback onDeleteClicked;
+  final VoidCallback onInCartPressed;
+  final VoidCallback onLikeClicked;
 
-  const ProductDetailScreen({super.key, required this.product});
+  const ProductDetailScreen({
+    super.key,
+    required this.product,
+    required this.onDeleteClicked,
+    required this.onInCartPressed,
+    required this.onLikeClicked,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +45,39 @@ class ProductDetailScreen extends StatelessWidget {
             Text(
               product.subtitle,
               style: const TextStyle(fontSize: 18),
-
             ),
+
+            const Spacer(),
+
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      onLikeClicked();
+                    },
+                    icon: Icon(Icons.favorite_outline)
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                OutlinedButton(
+                    onPressed: () {
+                      onInCartPressed();
+                    },
+                    child: const Text("В корзину")
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                OutlinedButton(
+                    onPressed: () {
+                      onDeleteClicked();
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Удалить")
+                ),
+              ],
+            )
           ],
         ),
       ),

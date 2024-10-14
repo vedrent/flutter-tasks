@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/data/ProductsData.dart';
-import 'package:task_5/presentation/screens/CreateProductScreen.dart';
-import 'package:task_5/presentation/screens/ProductDetailsScreen.dart';
+import 'package:task_5/presentation/screens/product/CreateProductScreen.dart';
+import 'package:task_5/presentation/screens/product/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/widgets/ProductWidget.dart';
+import 'package:task_5/data/CartItemData.dart';
+import 'package:task_5/presentation/models/CartItemModel.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -34,9 +36,36 @@ class _MainScreenState extends State<MainScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductDetailScreen(product: product),
+                  builder: (context) => ProductDetailScreen(
+                    product: product,
+                    onDeleteClicked: () {
+                      setState(() {
+                        products.remove(product);
+                        initialCartData.removeWhere((element) => element.id == product.id);
+                        initialProducts.remove(product);
+                      });
+                    }, onInCartPressed: () {
+                    initialCartData.add(CartItemModel(
+                        product.id,
+                        product.title,
+                        product.subtitle,
+                        product.imageUri,
+                        product.cost,
+                        1
+                    ));
+                  }, onLikeClicked: () {
+                    setState(() {
+                      product.isFavorite = !product.isFavorite;
+                    });
+                  },
+                  ),
                 ),
               );
+            },
+            onLikeClicked: () {
+              setState(() {
+                product.isFavorite = !product.isFavorite;
+              });
             },
           );
         },

@@ -1,31 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/presentation/models/ProductModel.dart';
 
-class ProductWidget extends StatefulWidget {
+class ProductWidget extends StatelessWidget {
   final ProductModel product;
   final VoidCallback onTap;
+  final VoidCallback onLikeClicked;
 
   const ProductWidget({
     super.key,
     required this.product,
     required this.onTap,
-  });
-
-  @override
-  State<ProductWidget> createState() =>
-      _ProductWidgetState(
-          product: product,
-          onTap: onTap
-      );
-}
-
-class _ProductWidgetState extends State<ProductWidget> {
-  final ProductModel product;
-  final VoidCallback onTap;
-
-  _ProductWidgetState({
-    required this.product,
-    required this.onTap,
+    required this.onLikeClicked,
   });
 
   IconData getFavoriteIconData() {
@@ -59,9 +44,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   IconButton(
                       onPressed: () {
-                        setState(() {
-                          product.isFavorite = !product.isFavorite;
-                        });
+                        onLikeClicked();
                       },
                       icon: Icon(getFavoriteIconData(),
                         color: product.isFavorite ? Colors.red : Colors.white,

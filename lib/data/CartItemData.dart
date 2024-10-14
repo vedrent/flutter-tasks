@@ -1,7 +1,7 @@
-import '../presentation/models/CartModel.dart';
+import '../presentation/models/CartItemModel.dart';
 
-var initialShoppingCartData = [
-  CartModel(
+var initialCartData = [
+  CartItemModel(
       0,
       "Наушники беспроводные JB L700 накладные",
       "Наличие микрофона: Да\n"
