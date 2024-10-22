@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_5/presentation/screens/MainRouter.dart';
+import 'package:task_5/presentation/screens/main_router.dart';
+
+import 'my_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,15 +10,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
-          useMaterial3: true,
-        ),
-        home: const MainRouter()
+    debugShowCheckedModeBanner: false,
+      theme: getTheme(context),
+      home: const MainRouter()
     );
   }
 }
