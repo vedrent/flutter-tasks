@@ -1,20 +1,15 @@
-# Flutter task_6 Петров Павел Константинович
+# Flutter task_7 Петров Павел Константинович
 
 ### Создание проекта
-1. Создал проект на Flutter, взяв за основу предыдущий
-2. Создал корзину, в которую можно добавлять товары, изменять их количество, удалять из корзины, а также видеть общую сумму товаров
+1. Создал проект на Flutter
+2. Создал главный экран с каталогом, подогнал весь UI под пример из Figma
 
-![image](https://github.com/user-attachments/assets/69d47d25-2c79-4f6e-951f-5e7c96db69ee)
+![image](https://github.com/user-attachments/assets/64a25b13-f64b-4616-8b17-942a24e40571)
 
-3. Удаление реализовано через Slidable
+3. Создал экран с корзиной и товарами в ней, аналогично подогнал
 
-![image](https://github.com/user-attachments/assets/57236441-6172-48c1-96a0-10055cf52ea3)
+![image](https://github.com/user-attachments/assets/e86004b1-e1db-4f86-989d-c46069ece6e7)
 
-4. Также в карточку товара добавлены отображение избранного, добавление в корзину и удаление товара
+4. Создал экран профиля с данными и пунктами меню, аналогично подогнал
 
-![image](https://github.com/user-attachments/assets/38e3f484-4026-4424-b73f-2681930fff29)
-
-5. Обновил профиль и добавил возможность его редактирования, причём в режиме редактирования внешний вид профиля не изменяется
-
-![image](https://github.com/user-attachments/assets/b5cf8023-0cbc-4d92-96a6-74c0db5d1e4b)
-![image](https://github.com/user-attachments/assets/7f2e9274-232d-43a7-81a3-c4a80f162baf)
+![image](https://github.com/user-attachments/assets/ea243f9b-f187-45ad-bfcd-99f2eb8b1e84)
