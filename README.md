@@ -16,10 +16,10 @@
 
 5. Реализовал удаление товара с сервера
 
-<img src="https://github.com/user-attachments/assets/e2fdf0d6-9f79-402e-91ed-3b9f6a7f60ed" alt="drawing" width="500"/>
-<img src="https://github.com/user-attachments/assets/054e309c-e27f-4295-b584-aa97c48156c4" alt="drawing" width="500"/>
+<img src="https://github.com/user-attachments/assets/e2fdf0d6-9f79-402e-91ed-3b9f6a7f60ed" alt="drawing" width="400"/>
+<img src="https://github.com/user-attachments/assets/054e309c-e27f-4295-b584-aa97c48156c4" alt="drawing" width="400"/>
 
 6. Реализовал добавление нового товара на сервер
 
-<img src="https://github.com/user-attachments/assets/2eab2835-3725-4695-b3a7-18976289bfa0" alt="drawing" width="500"/>
-<img src="https://github.com/user-attachments/assets/6539b956-c278-49fd-b7e8-5d90bc88b8e9" alt="drawing" width="500"/>
+<img src="https://github.com/user-attachments/assets/2eab2835-3725-4695-b3a7-18976289bfa0" alt="drawing" width="400"/>
+<img src="https://github.com/user-attachments/assets/6539b956-c278-49fd-b7e8-5d90bc88b8e9" alt="drawing" width="400"/>
