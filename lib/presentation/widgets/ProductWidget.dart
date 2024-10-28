@@ -61,7 +61,11 @@ class ProductWidget extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: Text("${product.cost}₽",
-                    style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      color: Colors.green
+                    ),
                     ),
               ),
             ],
