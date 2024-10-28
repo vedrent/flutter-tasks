@@ -18,7 +18,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   void initState() {
     super.initState();
-    products.addAll(initialProducts.where((element) => element.isFavorite));
+    products.addAll(sharedProducts.where((element) => element.isFavorite));
   }
 
   @override
@@ -42,7 +42,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         setState(() {
                           products.remove(product);
                           initialCartData.removeWhere((element) => element.id == product.id);
-                          initialProducts.remove(product);
+                          sharedProducts.remove(product);
                         });
                       }, onInCartPressed: () {
                         initialCartData.add(CartItemModel(

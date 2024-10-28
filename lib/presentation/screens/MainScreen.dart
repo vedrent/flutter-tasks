@@ -19,7 +19,12 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    products.addAll(initialProducts);
+    var futureProducts = getProducts();
+    futureProducts.then((value) => {
+      setState(() {
+        products.addAll(value);
+      })
+    });
   }
 
   @override
@@ -42,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
                       setState(() {
                         products.remove(product);
                         initialCartData.removeWhere((element) => element.id == product.id);
-                        initialProducts.remove(product);
+                        sharedProducts.remove(product);
                       });
                     }, onInCartPressed: () {
                     initialCartData.add(CartItemModel(

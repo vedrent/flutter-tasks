@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/presentation/models/ProductModel.dart';
+import 'package:task_5/data/ProductsData.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final ProductModel product;
@@ -34,28 +35,34 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(product.imageUri),
-            const SizedBox(height: 12.0),
-            Text(
-              product.title,
-              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-            ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                "${product.cost}₽",
-                style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Image.network(
+                      product.imageUri,
+                    ),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      product.title,
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+                    Text(
+                      "${product.cost}₽",
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      product.subtitle,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 12.0),
-            Text(
-              product.subtitle,
-              style: const TextStyle(fontSize: 18),
-            ),
 
-            const Spacer(),
+            // const Spacer(),
 
             Row(
               children: [
@@ -91,6 +98,9 @@ class ProductDetailScreen extends StatelessWidget {
                 OutlinedButton(
                     onPressed: () {
                       onDeleteClicked();
+                      if (product.id != null) {
+                        deleteProduct(product.id!);
+                      }
                       Navigator.pop(context);
                     },
                     style: OutlinedButton.styleFrom(
