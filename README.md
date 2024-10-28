@@ -4,7 +4,7 @@
 1. Создал проект на Flutter, взяв за основу предыдущий
 2. Развернул API на go на localhost
 
-![image](https://github.com/user-attachments/assets/0bc523ca-30d6-4b61-983e-68fac9b7315f)
+<img src="[drawing.jpg](https://github.com/user-attachments/assets/0bc523ca-30d6-4b61-983e-68fac9b7315f)" alt="drawing" width="400"/>
 
 3. Настроил dio_config для работы на localhost
 
