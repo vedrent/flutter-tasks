@@ -1,20 +1,25 @@
-# Flutter task_6 Петров Павел Константинович
+# Flutter task_8 Петров Павел Константинович
 
 ### Создание проекта
 1. Создал проект на Flutter, взяв за основу предыдущий
-2. Создал корзину, в которую можно добавлять товары, изменять их количество, удалять из корзины, а также видеть общую сумму товаров
+2. Развернул API на go на localhost
 
-![image](https://github.com/user-attachments/assets/69d47d25-2c79-4f6e-951f-5e7c96db69ee)
+![image](https://github.com/user-attachments/assets/0bc523ca-30d6-4b61-983e-68fac9b7315f)
 
-3. Удаление реализовано через Slidable
+3. Настроил dio_config для работы на localhost
 
-![image](https://github.com/user-attachments/assets/57236441-6172-48c1-96a0-10055cf52ea3)
+![image](https://github.com/user-attachments/assets/456eca53-ba6a-4277-9329-b98f463030e3)
 
-4. Также в карточку товара добавлены отображение избранного, добавление в корзину и удаление товара
+4. Внёс изменения, чтобы данные подтягивались с api
 
-![image](https://github.com/user-attachments/assets/38e3f484-4026-4424-b73f-2681930fff29)
+![image](https://github.com/user-attachments/assets/d5994b03-33ab-4594-81f1-ff5c691756ab)
 
-5. Обновил профиль и добавил возможность его редактирования, причём в режиме редактирования внешний вид профиля не изменяется
+5. Реализовал удаление товара с сервера
 
-![image](https://github.com/user-attachments/assets/b5cf8023-0cbc-4d92-96a6-74c0db5d1e4b)
-![image](https://github.com/user-attachments/assets/7f2e9274-232d-43a7-81a3-c4a80f162baf)
+![image](https://github.com/user-attachments/assets/e2fdf0d6-9f79-402e-91ed-3b9f6a7f60ed)
+![image](https://github.com/user-attachments/assets/054e309c-e27f-4295-b584-aa97c48156c4)
+
+6. Реализовал добавление нового товара на сервер
+
+![image](https://github.com/user-attachments/assets/2eab2835-3725-4695-b3a7-18976289bfa0)
+![image](https://github.com/user-attachments/assets/6539b956-c278-49fd-b7e8-5d90bc88b8e9)
