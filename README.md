@@ -13,7 +13,8 @@
 4. Внёс изменения, чтобы данные подтягивались с api
 
 <img src="https://github.com/user-attachments/assets/d5994b03-33ab-4594-81f1-ff5c691756ab" alt="drawing" width="400"/>
-<img src="https://github.com/user-attachments/assets/211ac0e7-1336-488c-8f50-2f57882424f3" alt="drawing" width="400"/>
+
+<img src="https://github.com/user-attachments/assets/211ac0e7-1336-488c-8f50-2f57882424f3" alt="drawing" width="600"/>
 
 5. Реализовал удаление товара с сервера
 
