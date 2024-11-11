@@ -1,20 +1,17 @@
-# Flutter task_6 Петров Павел Константинович
+# Flutter task_8 Петров Павел Константинович
 
-### Создание проекта
-1. Создал проект на Flutter, взяв за основу предыдущий
-2. Создал корзину, в которую можно добавлять товары, изменять их количество, удалять из корзины, а также видеть общую сумму товаров
+1. В прошлой работе был развёрнут API и запущен на localhost. Также реализовал подтягивание товаров, добавление и удаление их с сервера.
+2. В данной работе реализовал редактирование товара с отражением всей информации через api.
+3. Изменил карточку товара
 
-![image](https://github.com/user-attachments/assets/69d47d25-2c79-4f6e-951f-5e7c96db69ee)
+<img src="https://github.com/user-attachments/assets/7c090f26-57ef-4b26-b640-a854bb6353d8" alt="drawing" width="600"/>
 
-3. Удаление реализовано через Slidable
+4. Экран редактирования товара, в котором подтянулись текущие данные
 
-![image](https://github.com/user-attachments/assets/57236441-6172-48c1-96a0-10055cf52ea3)
+<img src="https://github.com/user-attachments/assets/50431f42-5e49-4a7f-be31-51090c4bcb2e" alt="drawing" width="400"/>
+<img src="https://github.com/user-attachments/assets/77ef5f5f-1606-4080-aee2-41b2217fbd8e" alt="drawing" width="400"/>
 
-4. Также в карточку товара добавлены отображение избранного, добавление в корзину и удаление товара
+5. Изменённые данные, отображающиеся как в карточке товара, так и на других экранах
 
-![image](https://github.com/user-attachments/assets/38e3f484-4026-4424-b73f-2681930fff29)
-
-5. Обновил профиль и добавил возможность его редактирования, причём в режиме редактирования внешний вид профиля не изменяется
-
-![image](https://github.com/user-attachments/assets/b5cf8023-0cbc-4d92-96a6-74c0db5d1e4b)
-![image](https://github.com/user-attachments/assets/7f2e9274-232d-43a7-81a3-c4a80f162baf)
+<img src="https://github.com/user-attachments/assets/2de6081a-0cdb-4dcd-9eca-c18c1c5ebb92" alt="drawing" width="400"/>
+<img src="https://github.com/user-attachments/assets/0468b2e7-9e3d-4e02-b302-c3443def78e8" alt="drawing" width="400"/>
