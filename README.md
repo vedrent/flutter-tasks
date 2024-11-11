@@ -14,4 +14,4 @@
 5. Изменённые данные, отображающиеся как в карточке товара, так и на других экранах
 
 <img src="https://github.com/user-attachments/assets/2de6081a-0cdb-4dcd-9eca-c18c1c5ebb92" alt="drawing" width="400"/>
-<img src="https://github.com/user-attachments/assets/0468b2e7-9e3d-4e02-b302-c3443def78e8" alt="drawing" width="400"/>
+<img src="https://github.com/user-attachments/assets/a9fdb6f5-ae9d-4826-853d-bbf10e08d5df" alt="drawing" width="400"/>
