@@ -59,7 +59,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 }
               },
               hintText: "Номер работы",
-              initialValue: profile.taskNumber,
+              initialValue: profile.taskNumber.toDouble(),
             ),
             TextFieldWidget(
                 onChanged: (text) { profile.phoneNumber = text; },

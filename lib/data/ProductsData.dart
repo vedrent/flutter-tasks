@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dio_config.dart';
+import 'package:flutter/foundation.dart';
 import '../presentation/models/ProductModel.dart';
 
 Future<List<ProductModel>> getProducts() async {
@@ -25,6 +26,13 @@ Future<List<ProductModel>> getProducts() async {
 void createProduct(ProductModel product) async {
   await getHttpClient().post(
       "/products/create",
+      data: serializeProduct(product)
+  );
+}
+
+void updateProduct(ProductModel product) async {
+  await getHttpClient().put(
+      "/products/update/${product.id}",
       data: serializeProduct(product)
   );
 }

@@ -4,6 +4,7 @@ import 'package:task_5/presentation/models/CartItemModel.dart';
 import 'package:task_5/data/CartItemData.dart';
 import '../../widgets/ProductWidget.dart';
 import '../product/ProductDetailsScreen.dart';
+import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -58,7 +59,39 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         setState(() {
                           product.isFavorite = !product.isFavorite;
                         });
-                      },),
+                      },
+                      onEditPressed: (onEdited) {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => EditProductScreen(
+                              onProductEdited: (newProduct) {
+                                onEdited(newProduct);
+                                var productsFuture = getProducts();
+                                productsFuture.then((value) =>
+                                    setState(() {
+                                      products = value;
+                                    })
+                                );
+                                setState(() {
+                                  try {
+                                    var shopIndex = initialCartData.indexWhere((element) => element.id == newProduct.id);
+                                    initialCartData[shopIndex] = CartItemModel(
+                                        newProduct.id,
+                                        newProduct.title,
+                                        newProduct.subtitle,
+                                        newProduct.imageUri,
+                                        newProduct.cost,
+                                        1
+                                    );
+                                  }
+                                  catch(e) {};
+                                  sharedProducts[index] = newProduct;
+                                });
+                              },
+                              productModel: product,
+                            )
+                        ));
+                      },
+                    ),
                   ),
                 );
               },

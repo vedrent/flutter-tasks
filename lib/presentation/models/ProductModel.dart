@@ -8,10 +8,10 @@ class ProductModel {
       this.isFavorite,
       );
 
-  final int? id;
-  final String title;
-  final String subtitle;
-  final String imageUri;
-  final double cost;
+  int? id;
+  String title;
+  String subtitle;
+  String imageUri;
+  double cost;
   bool isFavorite = false;
 }

@@ -4,6 +4,7 @@ import 'package:task_5/presentation/models/CartItemModel.dart';
 import 'package:task_5/presentation/screens/product/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/widgets/CartItem.dart';
 import 'package:task_5/data/CartItemData.dart';
+import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
 import 'BottomBar.dart';
 
 class CartScreen extends StatefulWidget {
@@ -49,6 +50,31 @@ class _CartScreenState extends State<CartScreen> {
                                 var product = sharedProducts.firstWhere((element) => element.id == item.id);
                                 product.isFavorite = !product.isFavorite;
                               });
+                            },
+                            onEditPressed: (onEdited) {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => EditProductScreen(
+                                    onProductEdited: (newProduct) {
+                                      onEdited(newProduct);
+                                      setState(() {
+                                        try {
+                                          var shopIndex = initialCartData.indexWhere((element) => element.id == newProduct.id);
+                                          initialCartData[shopIndex] = CartItemModel(
+                                              newProduct.id,
+                                              newProduct.title,
+                                              newProduct.subtitle,
+                                              newProduct.imageUri,
+                                              newProduct.cost,
+                                              1
+                                          );
+                                        }
+                                        catch(e) {};
+                                        sharedProducts[index] = newProduct;
+                                      });
+                                    },
+                                    productModel: product,
+                                  )
+                              ));
                             },
                           ),
                         ),

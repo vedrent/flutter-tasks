@@ -10,7 +10,7 @@ class NumericFieldWidget extends StatefulWidget {
 
   final ValueChanged<String>? onChanged;
   final String hintText;
-  final int? initialValue;
+  final double? initialValue;
 
   @override
   State<NumericFieldWidget> createState() => _NumericFieldWidgetState(
@@ -23,7 +23,7 @@ class NumericFieldWidget extends StatefulWidget {
 class _NumericFieldWidgetState extends State<NumericFieldWidget> {
   final ValueChanged<String>? onChanged;
   final String hintText;
-  final int? initialValue;
+  final double? initialValue;
 
   _NumericFieldWidgetState({
     required this.onChanged,
