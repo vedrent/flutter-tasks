@@ -1,20 +1,25 @@
-# Flutter task_6 Петров Павел Константинович
+# Flutter task_10 Петров Павел Константинович
 
-### Создание проекта
-1. Создал проект на Flutter, взяв за основу предыдущий
-2. Создал корзину, в которую можно добавлять товары, изменять их количество, удалять из корзины, а также видеть общую сумму товаров
+1. В данной работе развернул базу данных на postgres и реализовал подключение к ней через api
 
-![image](https://github.com/user-attachments/assets/69d47d25-2c79-4f6e-951f-5e7c96db69ee)
+<img src="https://github.com/user-attachments/assets/d2dd6119-8e43-4b2c-af2f-752a1d620864" alt="drawing" width="600"/>
+<img src="https://github.com/user-attachments/assets/201feeb6-921b-4532-aac8-465093102daa" alt="drawing" width="600"/>
 
-3. Удаление реализовано через Slidable
+2. Добавил товары в БД при помощи api
 
-![image](https://github.com/user-attachments/assets/57236441-6172-48c1-96a0-10055cf52ea3)
+<img src="https://github.com/user-attachments/assets/220bc200-8874-47e9-aa1c-be019e39a3be" alt="drawing" width="600"/>
+<img src="https://github.com/user-attachments/assets/06b35cc8-5b44-4fe6-8f0e-1c751cc528d0" alt="drawing" width="600"/>
 
-4. Также в карточку товара добавлены отображение избранного, добавление в корзину и удаление товара
+3. Итегрировал api для избранного
 
-![image](https://github.com/user-attachments/assets/38e3f484-4026-4424-b73f-2681930fff29)
+<img src="https://github.com/user-attachments/assets/75ddfc68-2e37-406b-be67-13e7fd7fcec7" alt="drawing" width="600"/>
+<img src="https://github.com/user-attachments/assets/a0b02323-35be-4f6e-bff2-05093eb924ed" alt="drawing" width="600"/>
+<img src="https://github.com/user-attachments/assets/709e8641-b9e3-4758-930a-d6cff0b01ff3" alt="drawing" width="600"/>
 
-5. Обновил профиль и добавил возможность его редактирования, причём в режиме редактирования внешний вид профиля не изменяется
+<img src="" alt="drawing" width="600"/>
 
-![image](https://github.com/user-attachments/assets/b5cf8023-0cbc-4d92-96a6-74c0db5d1e4b)
-![image](https://github.com/user-attachments/assets/7f2e9274-232d-43a7-81a3-c4a80f162baf)
+4. Итегрировал api для корзины
+
+<img src="https://github.com/user-attachments/assets/598344b7-9632-4790-a09f-58a54671ea69" alt="drawing" width="600"/>
+<img src="https://github.com/user-attachments/assets/89ed2e97-4908-4b47-ae69-5b542384b72f" alt="drawing" width="600"/>
+<img src="https://github.com/user-attachments/assets/02e4befe-f7b5-4139-aadf-ea55bb3ecff3" alt="drawing" width="600"/>
