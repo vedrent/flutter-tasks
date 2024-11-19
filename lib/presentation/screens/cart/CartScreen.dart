@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:task_5/data/ProductsData.dart';
+import 'package:task_5/data/ProductsService.dart';
 import 'package:task_5/presentation/models/CartItemModel.dart';
 import 'package:task_5/presentation/screens/product/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/widgets/CartItem.dart';
-import 'package:task_5/data/CartItemData.dart';
+// import 'package:task_5/data/CartItemData.dart';
 import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
+import 'package:task_5/data/CartService.dart';
 import 'BottomBar.dart';
 
 class CartScreen extends StatefulWidget {
@@ -15,7 +16,18 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<CartItemModel> items = initialCartData;
+  List<CartItemModel> items = [];
+
+  @override
+  void initState() {
+    super.initState();
+    var futureCarts = getCart();
+    futureCarts.then((value) => {
+      setState(() {
+        items.addAll(value);
+      })
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,34 +53,17 @@ class _CartScreenState extends State<CartScreen> {
                             onDeleteClicked: () {
                               setState(() {
                                 items.remove(item);
+                                deleteCartItem(item);
                                 sharedProducts.removeWhere((element) => element.id == item.id);
                               });
                             },
                             onInCartPressed: () {},
-                            onLikeClicked: () {
-                              setState(() {
-                                var product = sharedProducts.firstWhere((element) => element.id == item.id);
-                                product.isFavorite = !product.isFavorite;
-                              });
-                            },
                             onEditPressed: (onEdited) {
                               Navigator.push(context, MaterialPageRoute(
                                   builder: (context) => EditProductScreen(
                                     onProductEdited: (newProduct) {
                                       onEdited(newProduct);
                                       setState(() {
-                                        try {
-                                          var shopIndex = initialCartData.indexWhere((element) => element.id == newProduct.id);
-                                          initialCartData[shopIndex] = CartItemModel(
-                                              newProduct.id,
-                                              newProduct.title,
-                                              newProduct.subtitle,
-                                              newProduct.imageUri,
-                                              newProduct.cost,
-                                              1
-                                          );
-                                        }
-                                        catch(e) {};
                                         sharedProducts[index] = newProduct;
                                       });
                                     },

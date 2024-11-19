@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:task_5/data/ProductsData.dart';
-import 'package:task_5/presentation/models/CartItemModel.dart';
-import 'package:task_5/data/CartItemData.dart';
+import 'package:task_5/data/ProductsService.dart';
+import 'package:task_5/data/CartService.dart';
+import 'package:task_5/data/FavoriteService.dart';
+// import 'package:task_5/presentation/models/CartItemModel.dart';
+// import 'package:task_5/data/CartItemData.dart';
 import '../../widgets/ProductWidget.dart';
 import '../product/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
@@ -19,7 +21,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   void initState() {
     super.initState();
-    products.addAll(sharedProducts.where((element) => element.isFavorite));
+    getFavorites().then((value) => setState(() {
+      products = value;
+    }));
   }
 
   @override
@@ -40,25 +44,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   MaterialPageRoute(
                     builder: (context) => ProductDetailScreen(product: product,
                       onDeleteClicked: () {
+                        deleteProductFromCart(product);
                         setState(() {
                           products.remove(product);
-                          initialCartData.removeWhere((element) => element.id == product.id);
                           sharedProducts.remove(product);
                         });
                       }, onInCartPressed: () {
-                        initialCartData.add(CartItemModel(
-                            product.id,
-                            product.title,
-                            product.subtitle,
-                            product.imageUri,
-                            product.cost,
-                            1
-                        ));
-                      },
-                      onLikeClicked: () {
-                        setState(() {
-                          product.isFavorite = !product.isFavorite;
-                        });
+                        increaseCartItemCount(product.id);
                       },
                       onEditPressed: (onEdited) {
                         Navigator.push(context, MaterialPageRoute(
@@ -72,18 +64,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     })
                                 );
                                 setState(() {
-                                  try {
-                                    var shopIndex = initialCartData.indexWhere((element) => element.id == newProduct.id);
-                                    initialCartData[shopIndex] = CartItemModel(
-                                        newProduct.id,
-                                        newProduct.title,
-                                        newProduct.subtitle,
-                                        newProduct.imageUri,
-                                        newProduct.cost,
-                                        1
-                                    );
-                                  }
-                                  catch(e) {};
                                   sharedProducts[index] = newProduct;
                                 });
                               },

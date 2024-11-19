@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_5/presentation/models/ProductModel.dart';
 import 'package:task_5/presentation/widgets/NumericFieldWidget.dart';
 import 'package:task_5/presentation/widgets/TextFieldWidget.dart';
-import 'package:task_5/data/ProductsData.dart';
+import 'package:task_5/data/ProductsService.dart';
 
 class CreateProductScreen extends StatefulWidget {
   const CreateProductScreen({super.key, required this.onProductCreated});

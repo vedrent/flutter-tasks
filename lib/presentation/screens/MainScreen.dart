@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:task_5/data/ProductsData.dart';
+import 'package:task_5/data/ProductsService.dart';
+import 'package:task_5/data/CartService.dart';
 import 'package:task_5/presentation/screens/product/CreateProductScreen.dart';
 import 'package:task_5/presentation/screens/product/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/widgets/ProductWidget.dart';
-import 'package:task_5/data/CartItemData.dart';
-import 'package:task_5/presentation/models/CartItemModel.dart';
+// import 'package:task_5/data/CartItemData.dart';
+// import 'package:task_5/presentation/models/CartItemModel.dart';
 import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    var futureProducts = getProducts();
+    var futureProducts = initializeProducts();
     futureProducts.then((value) => {
       setState(() {
         products.addAll(value);
@@ -47,22 +48,11 @@ class _MainScreenState extends State<MainScreen> {
                     onDeleteClicked: () {
                       setState(() {
                         products.remove(product);
-                        initialCartData.removeWhere((element) => element.id == product.id);
+                        deleteProductFromCart(product);
                         sharedProducts.remove(product);
                       });
                     }, onInCartPressed: () {
-                    initialCartData.add(CartItemModel(
-                        product.id,
-                        product.title,
-                        product.subtitle,
-                        product.imageUri,
-                        product.cost,
-                        1
-                    ));
-                  }, onLikeClicked: () {
-                    setState(() {
-                      product.isFavorite = !product.isFavorite;
-                    });
+                    increaseCartItemCount(product.id);
                   },
                     onEditPressed: (onEdited) {
                       Navigator.push(context, MaterialPageRoute(
@@ -76,18 +66,6 @@ class _MainScreenState extends State<MainScreen> {
                                   })
                               );
                               setState(() {
-                                try {
-                                  var shopIndex = initialCartData.indexWhere((element) => element.id == newProduct.id);
-                                  initialCartData[shopIndex] = CartItemModel(
-                                      newProduct.id,
-                                      newProduct.title,
-                                      newProduct.subtitle,
-                                      newProduct.imageUri,
-                                      newProduct.cost,
-                                      1
-                                  );
-                                }
-                                catch(e) {};
                                 sharedProducts[index] = newProduct;
                               });
                             },

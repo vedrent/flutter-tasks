@@ -3,7 +3,7 @@ import 'package:task_5/presentation/models/ProductModel.dart';
 import 'package:task_5/presentation/widgets/NumericFieldWidget.dart';
 import 'package:task_5/presentation/widgets/TextFieldWidget.dart';
 
-import '../../../data/ProductsData.dart';
+import '../../../data/ProductsService.dart';
 
 class EditProductScreen extends StatefulWidget {
   const EditProductScreen({

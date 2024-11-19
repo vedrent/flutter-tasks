@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/CartItemModel.dart';
 import '../screens/cart/CartItemCounter.dart';
+import 'package:task_5/data/CartService.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CartItem extends StatelessWidget {
@@ -31,6 +32,7 @@ class CartItem extends StatelessWidget {
               SlidableAction(
                 onPressed: (context) {
                   deleteItem();
+                  deleteCartItem(item);
                 },
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
@@ -58,13 +60,20 @@ class CartItem extends StatelessWidget {
               count: item.count,
               onIncreasePressed: () {
                 onCountChanged(item.count + 1);
+                if (item.id != null) {
+                  increaseCartItemCount(item.id!);
+                }
               },
               onDecreasePressed: () {
                 if (item.count == 1) {
                   deleteItem();
+                  deleteCartItem(item);
                 }
                 else {
                   onCountChanged(item.count - 1);
+                  if (item.id != null) {
+                    decreaseCartItemCount(item.id!);
+                  }
                 }
               },
             ),
