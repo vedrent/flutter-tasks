@@ -12,7 +12,16 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  var profile = profileModel;
+
+  @override
+  void initState() {
+    getProfile().then((value) => setState(() {
+      debugPrint(value.name);
+      profile = value;
+    }));
+    super.initState();
+  }
+  PersonModel profile = profileModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,30 +33,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextFormField(
-              initialValue: profile.name,
-              maxLines: null,
-              readOnly: true,
+            Container(
+              child: Text(
+                profile.name,
+                style: const TextStyle(fontSize: 22),
+              ),
+              width: 500,
+              alignment: Alignment.center,
             ),
-            TextFormField(
-              initialValue: profile.group,
-              maxLines: null,
-              readOnly: true,
+            const SizedBox(height: 12.0),
+
+            Text(
+              profile.group,
+              style: const TextStyle(fontSize: 22),
             ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              initialValue: "Flutter task_${profile.taskNumber.toString()}",
-              readOnly: true,
+            const SizedBox(height: 12.0),
+            Text(
+              "Flutter task_${profile.taskNumber.toString()}",
+              style: const TextStyle(fontSize: 22),
             ),
-            TextFormField(
-              initialValue: profile.phoneNumber,
-              maxLines: null,
-              readOnly: true,
+            const SizedBox(height: 12.0),
+            Text(
+              profile.phoneNumber,
+              style: const TextStyle(fontSize: 22),
             ),
-            TextFormField(
-              initialValue: profile.email,
-              maxLines: null,
-              readOnly: true,
+            const SizedBox(height: 12.0),
+            Text(
+              profile.email,
+              style: const TextStyle(fontSize: 22),
             ),
 
             const Spacer(),
