@@ -12,10 +12,10 @@
 
 3. Создал экраны регистрации и входа 
 
-<img src="https://github.com/user-attachments/assets/03a3581f-31a0-4c88-a938-3970f8ab2561" alt="drawing" width="500"/>
-<img src="https://github.com/user-attachments/assets/84813e49-7b07-4286-b2ef-4313ebb20938" alt="drawing" width="500"/>
+<img src="https://github.com/user-attachments/assets/03a3581f-31a0-4c88-a938-3970f8ab2561" alt="drawing" width="400"/>
+<img src="https://github.com/user-attachments/assets/84813e49-7b07-4286-b2ef-4313ebb20938" alt="drawing" width="400"/>
 <img src="https://github.com/user-attachments/assets/824698c8-da20-4f80-a53e-13a88beb44e5" alt="drawing" width="400"/>
 
 4. Реализовал подтягивание данных о пользователе в профиль
 
-<img src="https://github.com/user-attachments/assets/91bf3daf-38a8-443a-9336-becb9ab38766" alt="drawing" width="600"/>
+<img src="https://github.com/user-attachments/assets/91bf3daf-38a8-443a-9336-becb9ab38766" alt="drawing" width="500"/>
