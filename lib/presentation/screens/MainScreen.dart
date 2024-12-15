@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/data/ProductsService.dart';
 import 'package:task_5/data/CartService.dart';
+import 'package:task_5/presentation/models/ProductModel.dart';
 import 'package:task_5/presentation/screens/product/CreateProductScreen.dart';
 import 'package:task_5/presentation/screens/product/ProductDetailsScreen.dart';
+import 'package:task_5/presentation/screens/product/FilterModalScreen.dart';
+import 'package:task_5/presentation/screens/product/SortModalScreen.dart';
+import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
 import 'package:task_5/presentation/widgets/ProductWidget.dart';
 import 'package:task_5/presentation/widgets/TextFieldWidget.dart';
-// import 'package:task_5/data/CartItemData.dart';
-// import 'package:task_5/presentation/models/CartItemModel.dart';
-import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,8 +18,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  var products = [];
+  List<ProductModel> products = [];
+  List<ProductModel> allProducts = [];
   var searchString = "";
+  double minPrice = 0.0;
+  double maxPrice = double.infinity;
 
   @override
   void initState() {
@@ -27,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
     futureProducts.then((value) => {
       setState(() {
         products.addAll(value);
+        allProducts = value;
       })
     });
   }
@@ -61,29 +66,75 @@ class _MainScreenState extends State<MainScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  OutlinedButton(
-                      onPressed: () {
-                      },
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          minimumSize: const Size(190,40),
-                          backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
-                          side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+                  PopupMenuButton<String>(
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        minWidth: 190,
+                        minHeight: 40,
+                      ),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(182, 247, 143, 1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: const Color.fromRGBO(182, 247, 143, 1),
+                        ),
                       ),
                       child: const Row(
                         children: [
                           Icon(Icons.sort, size: 30),
-                          Text("Сортировка",
-                              style: TextStyle(fontSize: 18)),
+                          SizedBox(width: 8),
+                          Text(
+                            "Сортировка",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
                         ],
-                      )
+                      ),
+                    ),
+                    onSelected: (value) {
+                      handleSortSelection(value);
+                    },
+                    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                      const PopupMenuItem<String>(
+                        value: "titleAsc",
+                        child: Text('Название (по возрастанию)'),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: "titleDesc",
+                        child: Text('Название (по убыванию)'),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: "priceAsc",
+                        child: Text('Цена (по возрастанию)'),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: "priceDesc",
+                        child: Text('Цена (по убыванию)'),
+                      ),
+                    ],
+                    // color: Color.fromRGBO(182, 247, 143, 1),
                   ),
+                  // OutlinedButton(
+                  //     onPressed: openFilterDialog,
+                  //     style: OutlinedButton.styleFrom(
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(10),
+                  //         ),
+                  //         minimumSize: const Size(190,40),
+                  //         backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                  //         side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+                  //     ),
+                  //     child: const Row(
+                  //       children: [
+                  //         Icon(Icons.sort, size: 30),
+                  //         Text("Сортировка",
+                  //             style: TextStyle(fontSize: 18)),
+                  //       ],
+                  //     )
+                  // ),
                   const Spacer(),
                   OutlinedButton(
-                      onPressed: () {
-                      },
+                      onPressed: openFilterDialog,
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -124,7 +175,7 @@ class _MainScreenState extends State<MainScreen> {
                                 sharedProducts.remove(product);
                               });
                             }, onInCartPressed: () {
-                            increaseCartItemCount(product.id);
+                            increaseCartItemCount(product.id!);
                           },
                             onEditPressed: (onEdited) {
                               Navigator.push(context, MaterialPageRoute(
@@ -178,5 +229,48 @@ class _MainScreenState extends State<MainScreen> {
           child: const Icon(Icons.add),
         )
     );
+  }
+  void openFilterDialog() async {
+    final result = await filterProductsDialogBuilder(
+      context,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+    );
+    if (result.isNotEmpty) {
+      minPrice = result["minPrice"]!;
+      maxPrice = result["maxPrice"]!;
+      setState(() {
+        products = filterProducts();
+      });
+    }
+  }
+
+  List<ProductModel> filterProducts() {
+    return allProducts.where((product) {
+      bool priceMatches = product.cost >= minPrice && product.cost <= maxPrice;
+      bool searchMatches = product.title.toLowerCase().contains(searchString.toLowerCase()) ||
+          product.subtitle.toLowerCase().contains(searchString.toLowerCase());
+      return priceMatches && searchMatches;
+    }).toList();
+  }
+
+  void handleSortSelection(String sortTypeString) {
+    setState(() {
+      // final sortType = SortType.values.firstWhere((element) => element.name == sortTypeString);
+      switch(sortTypeString) {
+        case "priceAsc":
+          products.sort((a, b) => a.cost.compareTo(b.cost));
+          break;
+        case "priceDesc":
+          products.sort((a, b) => b.cost.compareTo(a.cost));
+          break;
+        case "titleAsc":
+          products.sort((a, b) => a.title.compareTo(b.title));
+          break;
+        case "titleDesc":
+          products.sort((a, b) => b.title.compareTo(a.title));
+          break;
+      }
+    });
   }
 }
