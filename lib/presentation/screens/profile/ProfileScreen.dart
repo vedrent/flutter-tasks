@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/presentation/screens/profile/EditProfileScreen.dart';
+import 'package:task_5/presentation/screens/orders/OrdersScreen.dart';
 
 import 'package:task_5/data/PersonService.dart';
 import 'package:task_5/presentation/models/PersonModel.dart';
@@ -27,7 +28,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Профиль"),
+        title: Row(
+          children: [
+            const Text("Профиль"),
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => const OrdersScreen(),
+                ));
+              },
+              icon: const Icon(Icons.history_outlined, size: 35,),
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

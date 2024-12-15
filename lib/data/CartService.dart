@@ -61,6 +61,13 @@ void increaseCartItemCount(int productId) async {
   );
 }
 
+Future<void> clearCart() async {
+  var userId = getUserId();
+  await getHttpClient().delete(
+      "/cart/$userId/"
+  );
+}
+
 CartItemModel deserializeCartItem(dynamic productJson) {
   return CartItemModel(
       productJson['product_id'],

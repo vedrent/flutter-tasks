@@ -95,6 +95,11 @@ class _CartScreenState extends State<CartScreen> {
               child: CartBottomBar(
                 totalPrice: sumPrices(),
                 totalCount: getCartTotalCount(),
+                onCartClear: () {
+                  setState(() {
+                    items = [];
+                  });
+                },
               ),
             ),
           ],
