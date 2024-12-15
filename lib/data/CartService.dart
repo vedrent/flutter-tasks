@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:task_5/data/UserService.dart';
 
 import '../presentation/models/CartItemModel.dart';
@@ -79,8 +80,8 @@ CartItemModel deserializeCartItem(dynamic productJson) {
   );
 }
 
-dynamic serializeProduct(CartItemModel product) {
-  return {
+dynamic serializeCartItem(CartItemModel product) {
+  final request = {
     'product_id': null,
     'name': product.title,
     'description': product.subtitle,
@@ -88,4 +89,8 @@ dynamic serializeProduct(CartItemModel product) {
     'price': product.cost,
     'quantity': product.count
   };
+
+  debugPrint(request.toString());
+  // print(request);
+  return request;
 }

@@ -100,6 +100,7 @@ class _CartScreenState extends State<CartScreen> {
                     items = [];
                   });
                 },
+                itemsList: items,
               ),
             ),
           ],

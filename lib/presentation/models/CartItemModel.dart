@@ -14,4 +14,13 @@ class CartItemModel {
   final String imageUri;
   final double cost;
   int count = 0;
+
+  Map toJson() => {
+    'product_id': id,
+    'name': title,
+    'description': subtitle,
+    'image_url': imageUri,
+    'price': cost,
+    'quantity': count
+  };
 }

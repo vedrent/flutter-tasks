@@ -1,6 +1,10 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:task_5/data/UserService.dart';
+import 'package:task_5/data/ProductsService.dart';
 import 'package:task_5/presentation/models/OrderModel.dart';
+import 'package:task_5/presentation/models/ProductModel.dart';
+import 'package:task_5/presentation/models/CartItemModel.dart';
 import 'dio_config.dart';
 
 Future<List<OrderModel>> getOrders() async {
@@ -15,12 +19,25 @@ Future<List<OrderModel>> getOrders() async {
   return orders;
 }
 
-Future<void> createOrder(OrderModel order) async {
+Future<void> createOrder(OrderModel order, List<CartItemModel> items) async {
   var userId = getUserId();
-  var result = await getHttpClient().post(
+  await getHttpClient().post(
       "/orders/$userId",
-      data: serializeOrder(order, userId!)
+      data: serializeOrder(order, items, userId!)
   );
+}
+
+Future<List<ProductModel>> getOrderItems(OrderModel order) async {
+  final response = await getHttpClient().get(
+      "/orders/$userId/${order.id}"
+  );
+  var products = jsonDecode(response.data);
+  List<ProductModel> list = [];
+  for (var product in products) {
+    var deserialized = deserializeProduct(product);
+    list.add(deserialized);
+  }
+  return list;
 }
 
 OrderModel deserializeOrder(dynamic json) {
@@ -33,12 +50,16 @@ OrderModel deserializeOrder(dynamic json) {
   );
 }
 
-dynamic serializeOrder(OrderModel order, String userId) {
-  return {
+dynamic serializeOrder(OrderModel order, List<CartItemModel> items, String userId) {
+  final request = {
     'order_id': null,
     'user_id': userId,
     'total': order.total,
     'status': order.status,
-    'created_at': null
+    'created_at': null,
+    'products': items
   };
+  debugPrint(request.toString());
+  // print(request);
+  return request;
 }
