@@ -52,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
                       onChanged: (value) {
                         setState(() {
                           searchString = value;
+                          products = filterProducts();
                         });
                       },
                       hintText: "Поиск товара",
