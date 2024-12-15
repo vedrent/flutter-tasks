@@ -4,6 +4,7 @@ import 'package:task_5/data/CartService.dart';
 import 'package:task_5/presentation/screens/product/CreateProductScreen.dart';
 import 'package:task_5/presentation/screens/product/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/widgets/ProductWidget.dart';
+import 'package:task_5/presentation/widgets/TextFieldWidget.dart';
 // import 'package:task_5/data/CartItemData.dart';
 // import 'package:task_5/presentation/models/CartItemModel.dart';
 import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
@@ -17,6 +18,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   var products = [];
+  var searchString = "";
 
   @override
   void initState() {
@@ -32,58 +34,132 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: (1 / 1.7)),
-        itemCount: products.length,
-        itemBuilder: (BuildContext context, int index) {
-          var product = products[index];
-          return ProductWidget(
-            product: product,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductDetailScreen(
-                    product: products[index],
-                    onDeleteClicked: () {
-                      setState(() {
-                        products.remove(product);
-                        deleteProductFromCart(product);
-                        sharedProducts.remove(product);
-                      });
-                    }, onInCartPressed: () {
-                    increaseCartItemCount(product.id);
-                  },
-                    onEditPressed: (onEdited) {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => EditProductScreen(
-                            onProductEdited: (newProduct) {
-                              onEdited(newProduct);
-                              var productsFuture = getProducts();
-                              productsFuture.then((value) =>
-                                  setState(() {
-                                    products = value;
-                                  })
-                              );
-                              setState(() {
-                                sharedProducts[index] = newProduct;
-                              });
-                            },
-                            productModel: product,
-                          )
-                      ));
-                    },
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFieldWidget(
+                      initialValue: searchString,
+                      onChanged: (value) {
+                        setState(() {
+                          searchString = value;
+                        });
+                      },
+                      hintText: "Поиск товара",
+                    ),
                   ),
-                ),
-              );
-            },
-            onLikeClicked: () {
-              setState(() {
-                product.isFavorite = !product.isFavorite;
-              });
-            },
-          );
-        },
+                  const Icon(Icons.search, size: 30),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  OutlinedButton(
+                      onPressed: () {
+                      },
+                      style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          minimumSize: const Size(190,40),
+                          backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                          side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.sort, size: 30),
+                          Text("Сортировка",
+                              style: TextStyle(fontSize: 18)),
+                        ],
+                      )
+                  ),
+                  const Spacer(),
+                  OutlinedButton(
+                      onPressed: () {
+                      },
+                      style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          minimumSize: const Size(190,40),
+                          backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                          side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.filter_alt_outlined, size: 30),
+                          Text("Фильтр",
+                              style: TextStyle(fontSize: 18)),
+                        ],
+                      )
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: (1 / 1.7)),
+                itemCount: products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  var product = products[index];
+                  return ProductWidget(
+                    product: product,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetailScreen(
+                            product: products[index],
+                            onDeleteClicked: () {
+                              setState(() {
+                                products.remove(product);
+                                deleteProductFromCart(product);
+                                sharedProducts.remove(product);
+                              });
+                            }, onInCartPressed: () {
+                            increaseCartItemCount(product.id);
+                          },
+                            onEditPressed: (onEdited) {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => EditProductScreen(
+                                    onProductEdited: (newProduct) {
+                                      onEdited(newProduct);
+                                      var productsFuture = getProducts();
+                                      productsFuture.then((value) =>
+                                          setState(() {
+                                            products = value;
+                                          })
+                                      );
+                                      setState(() {
+                                        sharedProducts[index] = newProduct;
+                                      });
+                                    },
+                                    productModel: product,
+                                  )
+                              ));
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    onLikeClicked: () {
+                      setState(() {
+                        product.isFavorite = !product.isFavorite;
+                      });
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
         floatingActionButton: FloatingActionButton.small(onPressed: () {
           Navigator.push(
