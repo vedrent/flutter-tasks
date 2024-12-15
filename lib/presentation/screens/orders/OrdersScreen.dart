@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/data/OrdersService.dart';
 import 'package:task_5/presentation/models/OrderModel.dart';
+import 'package:task_5/presentation/widgets/OrderItem.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -22,17 +23,21 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: ListView.builder(
-                itemCount: orders.length,
-                itemBuilder: (BuildContext context, int index) => Row(
-                  children: [
-                    Text(orders[index].total.toString()),
-                    SizedBox(width: 8.0),
-                    Text(orders[index].createdAt.toString()),
-                  ],
-                )
+    return Scaffold(
+        appBar: AppBar(
+          title: const Row(
+            children: [
+              Text("История заказов")
+            ],
+          ),
+        ),
+        body: ListView.builder(
+            itemCount: orders.length,
+            itemBuilder: (BuildContext context, int index) => Column(
+              children: [
+                OrderItemWidget(order: orders[index]),
+                const Divider()
+              ],
             )
         )
     );
