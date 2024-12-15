@@ -5,7 +5,6 @@ import 'package:task_5/presentation/models/ProductModel.dart';
 import 'package:task_5/presentation/screens/product/CreateProductScreen.dart';
 import 'package:task_5/presentation/screens/product/ProductDetailsScreen.dart';
 import 'package:task_5/presentation/screens/product/FilterModalScreen.dart';
-import 'package:task_5/presentation/screens/product/SortModalScreen.dart';
 import 'package:task_5/presentation/screens/product/EditProductScreen.dart';
 import 'package:task_5/presentation/widgets/ProductWidget.dart';
 import 'package:task_5/presentation/widgets/TextFieldWidget.dart';
@@ -21,8 +20,8 @@ class _MainScreenState extends State<MainScreen> {
   List<ProductModel> products = [];
   List<ProductModel> allProducts = [];
   var searchString = "";
-  double minPrice = 0.0;
-  double maxPrice = double.infinity;
+  double minPrice = 0;
+  double maxPrice = 999999;
 
   @override
   void initState() {
@@ -83,55 +82,33 @@ class _MainScreenState extends State<MainScreen> {
                       child: const Row(
                         children: [
                           Icon(Icons.sort, size: 30),
-                          SizedBox(width: 8),
-                          Text(
-                            "Сортировка",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
-                          ),
+                          Text("Сортировка",
+                              style: TextStyle(fontSize: 18, color: Colors.black)),
                         ],
                       ),
                     ),
                     onSelected: (value) {
-                      handleSortSelection(value);
+                      handleSorting(value);
                     },
                     itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                       const PopupMenuItem<String>(
                         value: "titleAsc",
-                        child: Text('Название (по возрастанию)'),
+                        child: Text('По названию (А-Я)'),
                       ),
                       const PopupMenuItem<String>(
                         value: "titleDesc",
-                        child: Text('Название (по убыванию)'),
+                        child: Text('По названию (Я-А)'),
                       ),
                       const PopupMenuItem<String>(
                         value: "priceAsc",
-                        child: Text('Цена (по возрастанию)'),
+                        child: Text('Дешевле'),
                       ),
                       const PopupMenuItem<String>(
                         value: "priceDesc",
-                        child: Text('Цена (по убыванию)'),
+                        child: Text('Дороже'),
                       ),
                     ],
-                    // color: Color.fromRGBO(182, 247, 143, 1),
                   ),
-                  // OutlinedButton(
-                  //     onPressed: openFilterDialog,
-                  //     style: OutlinedButton.styleFrom(
-                  //         shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(10),
-                  //         ),
-                  //         minimumSize: const Size(190,40),
-                  //         backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
-                  //         side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
-                  //     ),
-                  //     child: const Row(
-                  //       children: [
-                  //         Icon(Icons.sort, size: 30),
-                  //         Text("Сортировка",
-                  //             style: TextStyle(fontSize: 18)),
-                  //       ],
-                  //     )
-                  // ),
                   const Spacer(),
                   OutlinedButton(
                       onPressed: openFilterDialog,
@@ -146,8 +123,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: const Row(
                         children: [
                           Icon(Icons.filter_alt_outlined, size: 30),
-                          Text("Фильтр",
-                              style: TextStyle(fontSize: 18)),
+                          Text("Фильтр", style: TextStyle(fontSize: 18)),
                         ],
                       )
                   ),
@@ -231,7 +207,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
   void openFilterDialog() async {
-    final result = await filterProductsDialogBuilder(
+    final result = await filterModalScreenBuilder(
       context,
       minPrice: minPrice,
       maxPrice: maxPrice,
@@ -254,10 +230,9 @@ class _MainScreenState extends State<MainScreen> {
     }).toList();
   }
 
-  void handleSortSelection(String sortTypeString) {
+  void handleSorting(String sortString) {
     setState(() {
-      // final sortType = SortType.values.firstWhere((element) => element.name == sortTypeString);
-      switch(sortTypeString) {
+      switch(sortString) {
         case "priceAsc":
           products.sort((a, b) => a.cost.compareTo(b.cost));
           break;

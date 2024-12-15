@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/presentation/widgets/NumericFieldWidget.dart';
 
-Future<Map<String, double>> filterProductsDialogBuilder(
+Future<Map<String, double>> filterModalScreenBuilder(
     BuildContext context, {
       required double minPrice,
       required double maxPrice
@@ -11,20 +11,19 @@ Future<Map<String, double>> filterProductsDialogBuilder(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Фильтр'),
+        title: const Text('Фильтр по цене'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             NumericFieldWidget(
                 initialValue: minPrice,
                 onChanged: (value) => minPrice = double.parse(value),
-                hintText: "Минимальная цена"
+                hintText: "От"
             ),
-            const SizedBox(height: 8,),
             NumericFieldWidget(
                 initialValue: maxPrice,
                 onChanged: (value) => maxPrice = double.parse(value),
-                hintText: "Максимальная цена"
+                hintText: "До"
             ),
           ],
         ),
@@ -33,22 +32,27 @@ Future<Map<String, double>> filterProductsDialogBuilder(
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Отменить'),
+            child: const Text('Отмена'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text('Подтвердить'),
-            onPressed: () {
-              Navigator.pop(context, {
-                "minPrice": minPrice,
-                "maxPrice": maxPrice,
-              });
-            },
+          OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context, {
+                  "minPrice": minPrice,
+                  "maxPrice": maxPrice,
+                });
+              },
+              style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minimumSize: const Size(150,40),
+                  backgroundColor: const Color.fromRGBO(182, 247, 143, 1),
+                  side: const BorderSide(color: const Color.fromRGBO(182, 247, 143, 1))
+              ),
+              child: const Text("Поиск")
           ),
         ],
       );
