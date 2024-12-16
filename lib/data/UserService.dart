@@ -10,6 +10,14 @@ String? getUserId() {
   return userId;
 }
 
+String getAdminId() {
+  return "7770f0a4-7700-4df6-94d1-91e7517abd03";
+}
+
+bool isAdmin() {
+  return getUserId() == getAdminId();
+}
+
 void signup(String password, PersonModel profile, VoidCallback callback) async {
   var result = await supabase.auth.signUp(
       email: profile.email,

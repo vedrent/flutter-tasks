@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:task_5/presentation/screens/profile/EditProfileScreen.dart';
 import 'package:task_5/presentation/screens/orders/OrdersScreen.dart';
-
-import 'package:task_5/data/PersonService.dart';
+import 'package:task_5/presentation/screens/chat/ChatScreen.dart';
+import 'package:task_5/presentation/screens/chat/AdminChatsScreen.dart';
 import 'package:task_5/presentation/models/PersonModel.dart';
+import 'package:task_5/data/PersonService.dart';
+import 'package:task_5/data/UserService.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -32,6 +34,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             const Text("Профиль"),
             Spacer(),
+            IconButton(
+              onPressed: () {
+                if (isAdmin()) {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => const AdminChatsScreen(),
+                  ));
+                }
+                else {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => const ChatScreen(),
+                  ));
+                }
+              },
+              icon: const Icon(Icons.chat_bubble_outline, size: 35,),
+            ),
             IconButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
