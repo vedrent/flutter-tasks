@@ -43,7 +43,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }
                 else {
                   Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => const ChatScreen(),
+                    builder: (context) => ChatScreen(
+                      chattedUserId: getAdminId(),
+                    ),
                   ));
                 }
               },

@@ -4,7 +4,11 @@ import 'package:task_5/presentation/widgets/ChatMessages.dart';
 import 'package:task_5/presentation/models/ChatMessageModel.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  final String chattedUserId;
+  const ChatScreen({
+    super.key,
+    required this.chattedUserId
+  });
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -15,26 +19,34 @@ class _ChatScreenState extends State<ChatScreen> {
   final ChatService service = ChatService();
 
   @override
-  void initState() {
-    service.sendMessage(ChatMessageModel(text: "Test"));
-    getMessages().then((value) => setState(() {
-      messages = value;
-    }));
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Чат'),
+        title: FutureBuilder<String>(
+          future: getUsername(widget.chattedUserId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Text('Загрузка...');
+            } else if (snapshot.hasError) {
+              return const Text('Ошибка');
+            } else {
+              return Text(snapshot.data ?? '');
+            }
+          },
+        ),
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
           children: [
             Expanded(
-              child: ChatMessages(),
+              child: ChatMessages(
+                chattedUserId: widget.chattedUserId,
+              ),
+            ),
+            NewChatMessage(
+              chatService: service,
+              chattedUserId: widget.chattedUserId,
             ),
           ],
         ),
