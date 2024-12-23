@@ -11,7 +11,7 @@ String? getUserId() {
 }
 
 String getAdminId() {
-  return "7770f0a4-7700-4df6-94d1-91e7517abd03";
+  return "ba4b57a0-7f49-4755-b3fb-795904c84c2a";
 }
 
 bool isAdmin() {
